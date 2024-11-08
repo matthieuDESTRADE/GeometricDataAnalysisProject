@@ -14,7 +14,7 @@ class DeltaNetAE(torch.nn.Module):
         self.self_condition = None
         print(sum(p.numel() for p in self.deltanet_base.parameters()))
         
-        self.lin_embedding = MLP([sum(conv_channels), latent_size])
+        self.lin_embedding = MLP([sum(conv_channels), 1024])
         self.classification_head = nn.Sequential(
             MLP([1024 * 2, 512]), nn.Dropout(0.5), MLP([512, 256]), nn.Dropout(0.5),
             nn.Linear(256, latent_size))
